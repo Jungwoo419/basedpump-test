@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy/Sell Token</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .trade-tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 10px;
+    }
+    .trade-tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+    }
+    .trade-tab.active {
+      border-bottom: 2px solid #007aff;
+      color: #007aff;
+    }
+    .trade-content {
+      display: none;
+    }
+    .trade-content.active {
+      display: block;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .input-group input {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .preset-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .preset-buttons button {
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #ddd;
+    }
+    .place-trade {
+      margin-top: 15px;
+      padding: 15px;
+      width: 100%;
+      background: #007aff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: underline;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Buy/Sell DogeKing</h1>
+    <div class="trade-tabs">
+      <div class="trade-tab active" onclick="toggleTrade('buy')">Buy</div>
+      <div class="trade-tab" onclick="toggleTrade('sell')">Sell</div>
+    </div>
+
+    <!-- Buy Section -->
+    <div id="buy" class="trade-content active">
+      <h2>Buy DogeKing</h2>
+      <p><strong>ETH Balance:</strong> <span id="ethBalance">3</span> ETH</p>
+      <input type="number" id="buyAmount" placeholder="Enter ETH amount" oninput="calculateTokens('buy')">
+      <p id="buyTokenAmount">You receive: 0 Tokens</p>
+      <div class="preset-buttons">
+        <button onclick="setPreset('buy', 0)">Reset</button>
+        <button onclick="setPreset('buy', 0.25)">25%</button>
+        <button onclick="setPreset('buy', 0.5)">50%</button>
+        <button onclick="setPreset('buy', 0.75)">75%</button>
+        <button onclick="setPreset('buy', 1)">100%</button>
+      </div>
+      <button class="place-trade" onclick="placeTrade('buy')">Place Trade</button>
+    </div>
+
+    <!-- Sell Section -->
+    <div id="sell" class="trade-content">
+      <h2>Sell DogeKing</h2>
+      <p><strong>DKG Balance:</strong> <span id="dkgBalance">1,000,000,000</span> DKG</p>
+      <input type="number" id="sellAmount" placeholder="Enter DKG amount" oninput="calculateTokens('sell')">
+      <p id="sellTokenAmount">You receive: 0 ETH</p>
+      <div class="preset-buttons">
+        <button onclick="setPreset('sell', 0)">Reset</button>
+        <button onclick="setPreset('sell', 0.25)">25%</button>
+        <button onclick="setPreset('sell', 0.5)">50%</button>
+        <button onclick="setPreset('sell', 0.75)">75%</button>
+        <button onclick="setPreset('sell', 1)">100%</button>
+      </div>
+      <button class="place-trade" onclick="placeTrade('sell')">Place Trade</button>
+    </div>
+
+    <a href="token_detail.html" class="back-link">Back to Token Details</a>
+  </div>
+
+  <script>
+    let ethBalance = 3;
+    let dkgBalance = 1000000000;
+    const tokensPerEth = 10000000000;
+
+    function toggleTrade(type) {
+      document.querySelectorAll(".trade-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".trade-content").forEach(tc => tc.classList.remove("active"));
+      document.getElementById(type).classList.add("active");
+      document.querySelector(`.trade-tab[onclick="toggleTrade('${type}')"]`).classList.add("active");
+    }
+
+    function calculateTokens(type) {
+      let inputValue = parseFloat(document.getElementById(`${type}Amount`).value) || 0;
+      let outputValue;
+
+      if (type === "buy") {
+        outputValue = inputValue * tokensPerEth;
+        document.getElementById("buyTokenAmount").textContent = `You receive: ${outputValue.toLocaleString()} Tokens`;
+      } else {
+        outputValue = inputValue / tokensPerEth;
+        document.getElementById("sellTokenAmount").textContent = `You receive: ${outputValue.toFixed(6)} ETH`;
+      }
+    }
+
+    function setPreset(type, percentage) {
+      if (type === "buy") {
+        let ethAmount = ethBalance * percentage;
+        document.getElementById("buyAmount").value = ethAmount.toFixed(3);
+        calculateTokens("buy");
+      } else {
+        let dkgAmount = dkgBalance * percentage;
+        document.getElementById("sellAmount").value = dkgAmount.toFixed(0);
+        calculateTokens("sell");
+      }
+    }
+
+    function placeTrade(type) {
+      alert(`${type === 'buy' ? 'Purchase' : 'Sell'} successful!`);
+    }
+  </script>
+
+</body>
+</html>

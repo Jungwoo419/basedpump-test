@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .token-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 2px solid #ddd;
+      margin-top: 20px;
+    }
+    .tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+      flex: 1;
+    }
+    .tab.active {
+      border-bottom: 2px solid #007aff;
+      color: #007aff;
+    }
+    .tab-content {
+      display: none;
+      text-align: left;
+      margin-top: 20px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .progress-bar {
+      width: 100%;
+      background: #ddd;
+      height: 20px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+    .progress {
+      height: 100%;
+      background: #007aff;
+      border-radius: 10px;
+      width: 40%;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      line-height: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background: #007aff;
+      color: white;
+    }
+    .floating-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      padding: 20px;
+      border-top: 2px solid #ddd;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .popup h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .trade-tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 10px;
+    }
+    .trade-tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+    }
+    .trade-tab.active {
+      border-bottom: 2px solid #007aff;
+      color: #007aff;
+    }
+    .trade-content {
+      display: none;
+    }
+    .trade-content.active {
+      display: block;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .input-group input {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .place-trade {
+      margin-top: 15px;
+      padding: 15px;
+      width: 100%;
+      background: #007aff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>DogeKing (DKG)</h1>
+    <img src="A_creative_and_futuristic_meme_token_logo_featurin.png" alt="Token Image" class="token-image">
+    <p><strong>Market Cap:</strong> $50,000</p>
+    <img src="A_detailed_financial_chart_representing_a_meme_tok.png" alt="Token Performance Graph" class="graph">
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('info')">Info</div>
+      <div class="tab" onclick="showTab('trades')">Trades</div>
+      <div class="tab" onclick="showTab('comments')">Comments</div>
+    </div>
+
+    <div id="info" class="tab-content active">
+      <p><strong>Description:</strong> The king of all dog coins, built for the moon!</p>
+      <p><strong>Bonding Curve Progress:</strong></p>
+      <div class="progress-bar"><div class="progress">40%</div></div>
+      <p><strong>Top Holders:</strong> @CryptoKing, @MoonShot, @DiamondHands</p>
+    </div>
+
+    <div id="trades" class="tab-content">
+      <table>
+        <tr><th>User</th><th>Type</th><th>ETH</th><th>Token</th><th>Txn</th></tr>
+        <tr><td>@CryptoFan</td><td>Buy</td><td>0.5</td><td>5B</td><td><a href="#">🔗</a></td></tr>
+      </table>
+    </div>
+
+    <div id="comments" class="tab-content">
+      <button onclick="alert('Comment popup coming soon')">Post a Comment</button>
+      <p><strong>@MemeInvestor:</strong> Just bought in! 🚀</p>
+    </div>
+  </div>
+
+  <a href="buy_sell.html">
+    <button class="floating-button">Buy/Sell</button>
+  </a>
+
+  <div class="popup" id="tradePopup">
+    <h2>Buy/Sell</h2>
+    <div class="trade-tabs">
+      <div class="trade-tab active" onclick="toggleTrade('buy')">Buy</div>
+      <div class="trade-tab" onclick="toggleTrade('sell')">Sell</div>
+    </div>
+    <div id="buy" class="trade-content active">
+      <input type="number" placeholder="ETH amount" oninput="calculateTokens(this.value)">
+      <p id="buyAmount">You receive: 0 Tokens</p>
+    </div>
+    <div id="sell" class="trade-content">
+      <input type="number" placeholder="ETH amount" oninput="calculateTokens(this.value)">
+      <p id="sellAmount">You sell: 0 Tokens</p>
+    </div>
+    <button class="place-trade">Place Trade</button>
+  </div>
+
+  <script>
+    function showTab(tab) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+      document.getElementById(tab).classList.add("active");
+    }
+  </script>
+
+</body>
+</html>

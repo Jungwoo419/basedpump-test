@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Initial Tokens</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .info {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .input-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .input-group input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+      font-size: 14px;
+    }
+    .input-group span {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-left: none;
+      border-radius: 0 5px 5px 0;
+      font-size: 14px;
+    }
+    .input-group img {
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+    }
+    .calculation {
+      font-size: 14px;
+      color: #007aff;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>(Recommended)<br> Initial Token Purchase</h1>
+  <p class="info">Decide how many <strong>[Token Name]</strong> you want to purchase. <br>
+    Buying a small amount of tokens during the deployment can demonstrate confidence and attract other buyers.</p>
+  
+  <div class="form-group">
+    <label for="ethAmount">Enter ETH Amount</label>
+    <div class="input-group">
+      <input type="number" id="ethAmount" placeholder="0.0" step="0.01" oninput="calculateTokens()" required>
+      <span>ETH <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum-icon-purple.svg" alt="ETH Logo"></span>
+    </div>
+    <p class="calculation" id="tokenCalculation">You receive: 0 [Token Name]</p>
+    
+    <button onclick="deployToken()">Deploy Token</button>
+  </div>
+
+  <script>
+    function calculateTokens() {
+      const ethAmount = parseFloat(document.getElementById("ethAmount").value) || 0;
+      const tokensPerEth = 10000000000; // 10 billion tokens per 1 ETH
+      const tokenName = "[Token Name]";
+      const totalTokens = (ethAmount * tokensPerEth).toLocaleString(); // Format with commas
+      document.getElementById("tokenCalculation").textContent = `You receive: ${totalTokens} ${tokenName}`;
+    }
+
+    function deployToken() {
+      const ethAmount = document.getElementById("ethAmount").value;
+      if (!ethAmount || parseFloat(ethAmount) <= 0) {
+        alert("수량 입력하지 않고 Deploy Token 버튼 누르면 토큰 생성 완료 .");
+      } else {
+        alert(`수량 입력 후 Deploy Token 버튼 누르면 Warpcast 연동 지갑으로 넘어가서 Token 구매`);
+      }
+    }
+  </script>
+</body>
+</html>

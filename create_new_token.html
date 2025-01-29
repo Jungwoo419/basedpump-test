@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Your Token</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+    .input-group {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    .input-group span {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-right: none;
+      border-radius: 5px 0 0 5px;
+      font-size: 14px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    input[type="text"] {
+      border-left: none;
+      border-radius: 0 5px 5px 0;
+    }
+    textarea {
+      resize: none;
+    }
+    .file-upload {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .file-upload button {
+      padding: 10px;
+      font-size: 14px;
+      background-color: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .file-upload p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+    .note {
+      font-size: 14px;
+      color: #007aff;
+      text-align: center;
+      margin: 20px 0;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .optional-label {
+      font-size: 12px;
+      color: #666;
+      margin-top: -10px;
+      margin-bottom: 15px;
+      display: block;
+      font-style: italic;
+    }
+    .back-to-main {
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .back-to-main a {
+      color: black;
+      text-decoration: none;
+    }
+
+.back-to-main a:hover {
+  text-decoration: underline;
+}
+  </style>
+</head>
+<body>
+  <h1>Create Your Token</h1>
+
+  <form id="tokenForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Enter token name" required>
+
+    <label for="ticker">Ticker</label>
+    <div class="input-group">
+      <span>$</span>
+      <input type="text" id="ticker" placeholder="e.g., DOGE" required>
+    </div>
+
+    <label>Image or Video</label>
+    <div class="file-upload">
+      <button type="button" onclick="document.getElementById('fileInput').click()">Select File</button>
+      <p id="fileName">No file selected</p>
+    </div>
+    <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;" onchange="showFileName(this)">
+
+    <label for="description">Description</label>
+    <span class="optional-label">(Optional)</span>
+    <textarea id="description" rows="3" placeholder="Add a brief description..."></textarea>
+
+    <label for="twitter">Twitter</label>
+    <span class="optional-label">(Optional)</span>
+    <input type="url" id="twitter" placeholder="https://twitter.com/yourhandle">
+
+    <label for="telegram">Telegram</label>
+    <span class="optional-label">(Optional)</span>
+    <input type="url" id="telegram" placeholder="https://t.me/yourchannel">
+
+    <p class="note">For a limited time, you can deploy your token for free. Later it would cost 0.003 ETH to launch a token.</p>
+    <button type="submit" onclick="location.href='optional_purchase_token.html'">Deploy Your Token</button>
+  </form>
+  <p class="back-to-main">
+    <a href="main_new.html">Back to Main</a>
+  </p> 
+  <script>
+    function showFileName(input) {
+      const fileName = input.files[0]?.name || "No file selected";
+      document.getElementById("fileName").textContent = fileName;
+    }
+
+    function deployToken(event) {
+      event.preventDefault();
+      alert("Your token has been successfully deployed!");
+    }
+  </script>
+</body>
+</html>
