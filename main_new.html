@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASEDPUMP.FUN</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 16px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h3 {
+      font-size: 20px;
+      color: #000;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .how-it-works {
+      font-size: 16px;
+      font-weight: bold;
+      color: red;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin: 20px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007aff;
+      color: #fff;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .search-bar input {
+      flex: 3;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+    }
+    .search-bar button {
+      flex: 1;
+      padding: 10px;
+      font-size: 14px;
+      border: none;
+      background-color: #007aff;
+      color: #fff;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+    .toggle-options {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .toggle-options button {
+      flex: 1;
+      padding: 10px;
+      margin: 0 5px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #ddd;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .toggle-options button.active {
+      background-color: #007aff;
+      color: #fff;
+    }
+    .token-list {
+      margin-top: 10px;
+    }
+    .token-card {
+      display: flex;
+      background: #fff;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .token-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      margin-right: 15px;
+    }
+    .token-info {
+      flex: 1;
+    }
+    .token-info h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .token-info p {
+      margin: 5px 0;
+      color: #666;
+      font-size: 14px;
+    }
+    .token-info .description {
+      color: #333;
+    }
+    .token-info .market-cap {
+      font-weight: bold;
+      color: #007aff;
+    }
+    .comments {
+      font-size: 14px;
+      color: #007aff;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <h1>BASEDPUMP.FUN</h1>
+  <br>
+  <h2>Launch your meme coins on Base chain in a minute. <br> A preset bonding curve ensures smooth token growth and trading!</h2>
+  <h3> Coins Created : 1,000 <br> Total market cap of all coins: $1,200,000</h3>
+  <p class="how-it-works">
+  <a href="how-it-works.html">[ How It Works ]</a>
+</p>
+  <button onclick="location.href='create_new_token.html'">Create Your Token</button>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search Memecoins..." id="searchInput">
+    <button onclick="searchMemecoin()">🔍</button>
+  </div>
+
+  <!-- Toggle Options -->
+  <div class="toggle-options" id="toggleOptions">
+    <button id="recentButton" class="active" onclick="showList('recent')">Recently Created/Traded</button>
+    <button id="topButton" onclick="showList('top')">Top Market Cap</button>
+  </div>
+
+  <!-- Token List -->
+  <div class="token-list" id="tokenList">
+    <div class="token-card">
+      <img src="https://via.placeholder.com/60" alt="Token Image">
+      <div class="token-info">
+        <h3>DogeKing (DKG)</h3>
+        <p><strong>Creator:</strong> @WarpUser123</p>
+        <p><strong>Created:</strong> 9hr ago</p>
+        <p class="market-cap">Market Cap: $50,000</p>
+        <p class="description">The king of all dog coins, built for the moon!</p>
+      </div>
+      <p class="comments">5 Comments</p>
+    </div>
+  </div>
+
+  <!-- Back to Full List Button -->
+  <button id="backButton" style="display: none;" onclick="resetList()">Back to Full List</button>
+
+  <script>
+    function showList(type) {
+      // Toggle active button
+      document.getElementById('recentButton').classList.toggle('active', type === 'recent');
+      document.getElementById('topButton').classList.toggle('active', type === 'top');
+
+      const tokenList = document.getElementById('tokenList');
+      if (type === 'recent') {
+        tokenList.innerHTML = `
+          <div class="token-card">
+            <img src="https://via.placeholder.com/60" alt="Token Image">
+            <div class="token-info">
+              <h3>DogeKing (DKG)</h3>
+              <p><strong>Creator:</strong> @WarpUser123</p>
+              <p><strong>Created:</strong> 9hr ago</p>
+              <p class="market-cap">Market Cap: $50,000</p>
+              <p class="description">The king of all dog coins, built for the moon!</p>
+            </div>
+            <p class="comments">5 Comments</p>
+          </div>
+        `;
+      } else if (type === 'top') {
+        tokenList.innerHTML = `
+          <div class="token-card">
+            <img src="https://via.placeholder.com/60" alt="Token Image">
+            <div class="token-info">
+              <h3>CatQueen (CQE)</h3>
+              <p><strong>Creator:</strong> @CryptoCat</p>
+              <p><strong>Created:</strong> 3min ago</p>
+              <p class="market-cap">Market Cap: $100,000</p>
+              <p class="description">Bow down to the queen of all meme tokens.</p>
+            </div>
+            <p class="comments">10 Comments</p>
+          </div>
+        `;
+      }
+    }
+
+    function searchMemecoin() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const tokenList = document.getElementById('tokenList');
+      const toggleOptions = document.getElementById('toggleOptions');
+      const backButton = document.getElementById('backButton');
+      
+      // Hide toggle options and show back button
+      toggleOptions.style.display = 'none';
+      backButton.style.display = 'block';
+
+      // Example tokens
+      const tokens = [
+        {
+          name: 'DogeKing',
+          ticker: 'DKG',
+          creator: '@WarpUser123',
+          marketCap: '$50,000',
+          created: '9hr ago',
+          description: 'The king of all dog coins, built for the moon!',
+          comments: 5
+        },
+        {
+          name: 'CatQueen',
+          ticker: 'CQE',
+          creator: '@CryptoCat',
+          marketCap: '$10,000',
+          created: '3min ago',
+          description: 'Bow down to the queen of all meme tokens.',
+          comments: 2
+        }
+      ];
+
+      const results = tokens.filter(token =>
+        token.name.toLowerCase().includes(query) || token.ticker.toLowerCase().includes(query)
+      );
+
+      if (results.length > 0) {
+        tokenList.innerHTML = results.map(token => `
+          <div class="token-card">
+            <img src="https://via.placeholder.com/60" alt="${token.name} Image">
+            <div class="token-info">
+              <h3>${token.name} (${token.ticker})</h3>
+              <p><strong>Creator:</strong> ${token.creator}</p>
+              <p><strong>Created:</strong> ${token.created}</p>
+              <p class="market-cap">Market Cap: ${token.marketCap}</p>
+              <p class="description">${token.description}</p>
+            </div>
+            <p class="comments">${token.comments} Comments</p>
+          </div>
+        `).join('');
+      } else {
+        tokenList.innerHTML = `<p>No results found for "${query}".</p>`;
+      }
+    }
+
+    function resetList() {
+      const toggleOptions = document.getElementById('toggleOptions');
+      const backButton = document.getElementById('backButton');
+      const tokenList = document.getElementById('tokenList');
+
+      // Show toggle options and hide back button
+      toggleOptions.style.display = 'flex';
+      backButton.style.display = 'none';
+
+      // Reset to Recently Created/Traded
+      showList('recent');
+    }
+  </script>
+</body>
+</html>
