@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASEDPUMP.FUN</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 16px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h3 {
+      font-size: 20px;
+      color: #000;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .how-it-works {
+      font-size: 16px;
+      font-weight: bold;
+      color: red;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin: 20px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007aff;
+      color: #fff;
+    }
+    .token-list {
+      margin-top: 10px;
+    }
+    .token-card {
+      display: flex;
+      background: #fff;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .token-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      margin-right: 15px;
+    }
+    .token-info {
+      flex: 1;
+    }
+    .token-info h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .token-info p {
+      margin: 5px 0;
+      color: #666;
+      font-size: 14px;
+    }
+    .token-info .market-cap {
+      font-weight: bold;
+      color: #007aff;
+    }
+    .toggle-options {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .toggle-options button {
+      flex: 1;
+      padding: 10px;
+      margin: 0 5px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #ddd;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .toggle-options button.active {
+      background-color: #007aff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>BASEDPUMP.FUN</h1>
+  <h2>Launch your meme coins on Base chain in a minute.<br> A preset bonding curve ensures smooth token growth and trading!</h2>
+  <h3>Coins Created: 1,000 <br> Total market cap of all coins: $1,200,000</h3>
+  
+  <p class="how-it-works">
+    <a href="how-it-works.html">[ How It Works ]</a>
+  </p>
+  
+  <button onclick="location.href='create_new_token.html'">Create Your Token</button>
+
+  <!-- Toggle Options -->
+  <div class="toggle-options">
+    <button id="recentButton" class="active" onclick="showList('recent')">Recently Created/Traded</button>
+    <button id="topButton" onclick="showList('top')">Top Market Cap</button>
+  </div>
+
+  <!-- Token List -->
+  <div class="token-list" id="tokenList"></div>
+
+  <script>
+    function showList(type) {
+      document.getElementById('recentButton').classList.toggle('active', type === 'recent');
+      document.getElementById('topButton').classList.toggle('active', type === 'top');
+
+      const tokenList = document.getElementById('tokenList');
+      let tokens = [];
+
+      if (type === 'recent') {
+        tokens = [
+          {
+            name: 'DogeKing',
+            ticker: 'DKG',
+            creator: '@WarpUser123',
+            marketCap: '$50,000',
+            created: '9hr ago',
+            description: 'The king of all dog coins, built for the moon!',
+            link: 'token_detail.html'
+          }
+        ];
+      } else if (type === 'top') {
+        tokens = [
+          {
+            name: 'CatQueen',
+            ticker: 'CQE',
+            creator: '@CryptoCat',
+            marketCap: '$100,000',
+            created: '3min ago',
+            description: 'Bow down to the queen of all meme tokens.',
+            link: 'token_detail.html'
+          }
+        ];
+      }
+
+      tokenList.innerHTML = tokens.map(token => `
+        <a href="${token.link}" class="token-link">
+          <div class="token-card">
+            <img src="https://via.placeholder.com/60" alt="Token Image">
+            <div class="token-info">
+              <h3>${token.name} (${token.ticker})</h3>
+              <p><strong>Creator:</strong> ${token.creator}</p>
+              <p><strong>Created:</strong> ${token.created}</p>
+              <p class="market-cap">Market Cap: ${token.marketCap}</p>
+              <p class="description">${token.description}</p>
+            </div>
+            <p class="comments">5 Comments</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    showList('recent');
+  </script>
+</body>
+</html>
